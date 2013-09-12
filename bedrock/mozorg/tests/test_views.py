@@ -13,7 +13,7 @@ from captcha.fields import ReCaptchaField
 from funfactory.urlresolvers import reverse
 from jinja2.exceptions import TemplateNotFound
 from requests.exceptions import Timeout
-from mock import Mock, patch
+from mock import ANY, Mock, patch
 from nose.tools import assert_false, eq_, ok_
 from pyquery import PyQuery as pq
 
@@ -23,6 +23,37 @@ from lib import l10n_utils
 
 
 _ALL = settings.STUB_INSTALLER_ALL
+
+
+@patch('bedrock.mozorg.views.l10n_utils.render')
+class TestHome(TestCase):
+    def setUp(self):
+        self.view = views.HomeTestView.as_view()
+        self.rf = RequestFactory()
+
+    def _test_view_template(self, resp_mock, template, qs=None):
+        args = ['/en-US/']
+        if qs is not None:
+            args.append(qs)
+        req = self.rf.get(*args)
+        self.view(req)
+        resp_mock.assert_called_once_with(req, template, ANY)
+        resp_mock.reset_mock()
+
+    def test_uses_default_template(self, resp_mock):
+        """Home page should render the default template with no QS."""
+        self._test_view_template(resp_mock, 'mozorg/home.html')
+
+    def test_uses_default_template_other_qs(self, resp_mock):
+        """Home page should render the default template with wrong QS."""
+        self._test_view_template(resp_mock, 'mozorg/home.html', {'a': 1})
+        self._test_view_template(resp_mock, 'mozorg/home.html', {'v': 2})
+        self._test_view_template(resp_mock, 'mozorg/home.html', {'v': 'Abide'})
+        self._test_view_template(resp_mock, 'mozorg/home.html', {'v': '1234'})
+
+    def test_uses_test_template(self, resp_mock):
+        """Home page should render the test template with the right QS."""
+        self._test_view_template(resp_mock, 'mozorg/home-b1.html', {'v': 1})
 
 
 class TestViews(TestCase):

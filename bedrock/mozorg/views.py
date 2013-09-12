@@ -226,3 +226,21 @@ class Robots(TemplateView):
     def get_context_data(self, **kwargs):
         SITE_URL = getattr(settings, 'SITE_URL', '')
         return {'disallow_all': not SITE_URL.endswith('://www.mozilla.org')}
+
+
+class HomeTestView(TemplateView):
+    """Home page view that will use a different template for a QS."""
+
+    def get_template_names(self):
+        version = self.request.GET.get('v', 0)
+        if version == '1':
+            template = 'mozorg/home-b1.html'
+        else:
+            template = 'mozorg/home.html'
+        return template
+
+    def render_to_response(self, context, **response_kwargs):
+        return l10n_utils.render(self.request,
+                                 self.get_template_names(),
+                                 context,
+                                 **response_kwargs)
