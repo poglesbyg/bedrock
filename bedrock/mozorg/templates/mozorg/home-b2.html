@@ -9,7 +9,7 @@
 {% from 'macros.html' import facebook_share_url, twitter_share_url %}
 
 {% block page_title %}{{_('Home of the Mozilla Project')}}{% endblock %}
-{% block body_id %}home-b1{% endblock %}
+{% block body_id %}home-b2{% endblock %}
 {% block body_class %}sand{% endblock %}
 
 {% block extra_meta %}
@@ -109,7 +109,7 @@
   </section>
 
   <section class="extra">
-    <div class="">
+    <div class="container">
 
       <section class="download">
         <h2>{{_('Different by design')}}</h2>
@@ -117,8 +117,8 @@
       </section>
 
       <section class="news">
-
         <h2>{{ _('In the news') }}</h2>
+
         <ul class="hfeed">
           <li class="hentry">
             <h3 class="entry-title">
@@ -146,7 +146,6 @@
         </ul>
 
         <p class="control"><a href="{{ press_blog_url() }}" hreflang="en-US" class="go">{{ _('See all news') }}</a></p>
-
       </section>
 
     </div>

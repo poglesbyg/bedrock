@@ -235,6 +235,8 @@ class HomeTestView(TemplateView):
         version = self.request.GET.get('v', 0)
         if version == '1':
             template = 'mozorg/home-b1.html'
+        elif version == '2':
+            template = 'mozorg/home-b2.html'
         else:
             template = 'mozorg/home.html'
         return template

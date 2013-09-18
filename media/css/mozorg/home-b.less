@@ -23,27 +23,33 @@
     white-space: nowrap;
 }
 
-/* @General page layout, overriding sandstone base styles *********
-#wrapper {
-    width: 100%;
-}
 
-#masthead,
-.container,
-.newsletter-form {
-    width: @widthDesktop - (@gridGutterWidth * 2);
-    .clearfix();
-    margin-left: auto;
-    margin-right: auto;
-    padding: 0;
-}
 
-#main-content {
-    padding: 0;
-}
+/* @General page layout *********/
 
-.newsletter-form {
-    padding: 0 10px;
+/* Override sandstone base styles so we can have full-width containers */
+#home-b2 {
+    #wrapper {
+        width: 100%;
+    }
+
+    #masthead,
+    .container,
+    .newsletter-form {
+        width: @widthDesktop - (@gridGutterWidth * 2);
+        .clearfix();
+        margin-left: auto;
+        margin-right: auto;
+        padding: 0;
+    }
+
+    #main-content {
+        padding: 0;
+    }
+
+    .newsletter-form {
+        padding: 0 10px;
+    }
 }
 
 /* Header, mission statement *********/
@@ -110,6 +116,10 @@
 .panel {
     display: block;
     position: relative;
+
+    &:focus {
+        outline: 0;
+    }
 }
 
 .wide .panel {
@@ -224,6 +234,17 @@
         }
     }
 
+    // Expand the link to fill the panel.
+    // This presumes a single block link for the entire panel. Future updates may negate this.
+    & > a {
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        padding: 100px 40px 40px 300px;
+    }
+
     a:link,
     a:visited {
         color: inherit;
@@ -234,10 +255,11 @@
     a:active {
         color: inherit;
         text-decoration: none;
+    }
 
-        .go {
-            text-decoration: underline;
-        }
+    a:focus .go,
+    .go:hover {
+        text-decoration: underline;
     }
 }
 
@@ -308,7 +330,7 @@
     }
 }
 
-.wide #panel-firefoxos .panel-title {
+.wide #panel-fxos .panel-title {
         background: #0095dd;
         background: -webkit-linear-gradient(bottom, rgba(0, 84, 160, .8) 65%, rgba(0, 84, 160, 0) 100%);
         background:    -moz-linear-gradient(bottom, rgba(0, 84, 160, .8) 65%, rgba(0, 84, 160, 0) 100%);
@@ -423,6 +445,18 @@
     }
 }
 
+#home-b2 .extra {
+    background: #c1423d;
+    padding: 40px 0;
+    color: #fff;
+    text-shadow: 0 1px 0 rgba(0, 0, 0, .1);
+
+    h2 {
+        color: #fff;
+        text-shadow: 0 1px 0 rgba(0, 0, 0, .1);
+    }
+}
+
 .news {
     .span(7);
     float: right;
@@ -438,16 +472,18 @@
         .open-sans;
     }
 
-    .entry-summary {
-        color: #5a1c1a;
-    }
-
     .jcarousel-clip {
         overflow: hidden;
         height: 6em;
         margin: 0 0 .5em;
     }
 
+}
+
+#home-b2 .news a:link,
+#home-b2 .news a:visited {
+    color: #fff;
+    text-shadow: 0 1px 0 rgba(0, 0, 0, .1);
 }
 
 .news-buttons {
@@ -637,7 +673,7 @@
     .panel {
         float: none;
         width: 100%;
-        height: 4em;
+        height: 4.5em;
         margin: 0;
         overflow: hidden;
         position: relative;
@@ -656,7 +692,7 @@
         position: static;
         width: auto;
         height: auto;
-        padding: .5em 20px .5em 45%;
+        padding: .75em 20px .75em 45%;
         min-height: 3em;
         text-align: left;
         font-size: 16px;

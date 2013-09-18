@@ -25,7 +25,72 @@
     }
     $(doneResizing);  // Call once when done loading the page to initialize.
 
+    var accordion = {
+        // Expand the accordion horizontally
+        expandHorz: function(elem) {
+            $('.panel-title').fadeOut(200);
+            elem.stop().removeClass('compressed').addClass('expanded').animate({'width':'64%'},500);
+            elem.siblings().stop().removeClass('expanded').addClass('compressed').animate({'width':'12%'},500);
+            $('.panel-content', elem).stop(true,true).delay(200).fadeIn();
+        },
 
+        // Contract the accordion horizontally
+        contractHorz: function() {
+            $('.panel').stop().animate({'width':'25%'},700, function() {
+                $('.panel-title').fadeIn(250);
+            }).removeClass('expanded compressed');
+            $('.panel-content').stop(true,true).fadeOut(500);
+        },
+
+        // Expand the accordion vertically
+        expandVert: function(elem) {
+            $('.panel-title').fadeOut(200);
+            elem.stop().removeClass('compressed').addClass('expanded').animate({'height':'300px'},500);
+            elem.siblings().stop().removeClass('expanded').addClass('compressed').animate({'height':'3em'},500);
+            $('.panel-content', elem).stop(true,true).delay(200).fadeIn();
+        },
+
+        // Contract the accordion vertically
+        contractVert: function() {
+            $('.panel').stop().animate({'height':'4.5em'},700, function() {
+                $('.panel-title').fadeIn(250);
+            }).removeClass('expanded compressed');
+            $('.panel-content').stop(true,true).fadeOut(500);
+        },
+    };
+
+    if (wideMode) {
+        // Horizontal accordion for wide viewports
+        $('.panel').hover(
+            function() { accordion.expandHorz($(this)); },
+            function() { accordion.contractHorz(); }
+        );
+
+        $('.panel').on('focus', function(){
+            accordion.expandHorz($(this));
+        });
+
+        $('.panel-content > a').on('blur', function() {
+            accordion.contractHorz();
+        });
+    } else {
+        // Vertical accordion for narrow viewports
+        $('.panel').hover(
+            function() { accordion.expandVert($(this)); },
+            function() { accordion.contractVert(); }
+        );
+
+        $('.panel').on('click', function() {
+            accordion.expandVert($(this));
+        });
+
+        $('.panel-content > a').on('blur', function() {
+            accordion.contractVert();
+        });
+    }
+
+
+/*
     // Animate the accordion
     $('.accordion > li').hover(
         function() {
@@ -57,6 +122,7 @@
             }
         }
     );
+*/
 
     // News
     // Set up the carousel
