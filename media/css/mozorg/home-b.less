@@ -606,7 +606,6 @@
 // @News
 .news {
     .span(7);
-    float: right;
 
     .hentry {
         list-style: none;
@@ -661,12 +660,29 @@
     }
 }
 
+// @Contribute
+.contribute {
+    .span(7);
+
+    p {
+        .open-sans-light;
+        font-size: 20px;
+    }
+
+}
+
 // Light colors for B2
 .home-b2 {
     .news a:link,
-    .news a:visited {
+    .news a:visited,
+    .contribute a:link,
+    .contribute a:visited {
         color: #fff;
         text-shadow: 0 1px 0 rgba(0, 0, 0, .1);
+    }
+
+    .contribute a {
+        font-weight: bold;
     }
 
     .news-buttons button {
@@ -761,9 +777,9 @@
     }
 
     // Adjust columns
-    .news {
+    .news
+    .contribute {
         .span_narrow(7);
-        float: right;
 
         .jcarousel-clip {
             overflow: hidden;
@@ -987,7 +1003,8 @@
 
     // Full width columns for narrow viewports
     .news,
-    .download {
+    .download,
+    .contribute {
         width: auto;
         float: none;
         margin: 0 auto @baseLine;

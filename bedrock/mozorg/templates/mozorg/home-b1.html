@@ -4,7 +4,7 @@
 
 {% add_lang_files "mozorg/home" %}
 
-{% extends "/mozorg/base-resp.html" %}
+{% extends "mozorg/base-resp.html" %}
 
 {% from 'macros.html' import facebook_share_url, twitter_share_url %}
 
@@ -109,17 +109,19 @@
   </section>
 
   <section class="extra">
-    <div class="">
 
       <section class="download">
-        <h2>{{_('Different by design')}}</h2>
+        <h2>{{ _('Different by design') }}</h2>
         {{ download_firefox(icon=True) }}
       </section>
 
-      <section class="news">
+    {% if request.locale in settings.PRESS_BLOGS %}
 
+      <section class="news">
         <h2>{{ _('In the news') }}</h2>
         <ul class="hfeed">
+
+        {% l10n home_news, 20130930 %}
           <li class="hentry">
             <h3 class="entry-title">
               <a class="url go" rel="bookmark external" hreflang="en-US" href="https://blog.mozilla.org/blog/2013/08/01/telefonica-announces-launches-of-first-firefox-os-devices-in-latin-america/">
@@ -143,13 +145,43 @@
               </a>
             </h3>
           </li>
+        {% endl10n %}
+
         </ul>
-
-        <p class="control"><a href="{{ press_blog_url() }}" hreflang="en-US" class="go">{{ _('See all news') }}</a></p>
-
+        <p class="control"><a href="{{ press_blog_url() }}" class="go">{{ _('See all news') }}</a></p>
       </section>
 
-    </div>
+    {% elif request.locale in ['hu','pt-BR'] %}
+
+      <section class="contribute fxos">
+        <h2>{{ _('Get involved') }}</h2>
+        <p>
+          {{ _('Help launch Firefox OS in your country.') }}
+          <br>
+          <a href="#">{{ _('Become a Mobilizer today.') }}</a>
+        </p>
+      </section>
+
+    {% elif has_contribute %}
+
+      <section class="contribute volunteer">
+        <h2>{{ _('Get involved') }}</h2>
+        <p>
+        {{ _('You don’t have to know how to code to get involved with Mozilla. <a href="%s">Learn more about our volunteer opportunities</a>.') | format(url('mozorg.contribute')) }}
+        </p>
+      </section>
+
+    {% else %}
+
+      <section class="contribute locale">
+        <h2>{{ _('Get involved') }}</h2>
+        <p>
+        join l10n
+        </p>
+      </section>
+
+    {% endif %}
+
   </section>
 
 </main>
