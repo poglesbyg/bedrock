@@ -181,4 +181,4 @@
         }
     }
 
-})(window, jQuery);
+})(jQuery);

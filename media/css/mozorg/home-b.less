@@ -48,6 +48,10 @@
         padding: 0;
     }
 
+    .pillars {
+        width: @widthDesktop - (@gridGutterWidth * 2);
+    }
+
     #colophon {
         margin-top: 0;
     }
@@ -97,7 +101,6 @@
 // @Accordion
 .pillars {
     background: url(/media/img/home/box-shadow-960.png) center bottom no-repeat;
-    width: @widthDesktop - (@gridGutterWidth * 2) - 10;
     padding: 0 0 40px;
     position: relative;
     margin: 0 auto 20px;
@@ -692,7 +695,8 @@
 
 
 
-/* Tablet Layout: 760px */
+/****************************************************************************/
+// @Tablet Layout: 760px
 @media only screen and (min-width: @breakTablet) and (max-width: @breakDesktop) {
 
     // Adjust layout for B2
@@ -701,6 +705,10 @@
         .container,
         .newsletter-form {
             width: @widthTablet - (@gridGutterWidth * 2);
+        }
+
+        .pillars {
+            width: @widthTablet - (@gridGutterWidth * 2) - 10;
         }
     }
 
@@ -871,6 +879,8 @@
 
 }
 
+
+
 /* Mobile layout: 320px */
 @media only screen and (max-width: @breakTablet) {
 
@@ -882,50 +892,6 @@
             width: @widthMobile - (@gridGutterWidth * 2);
         }
     }
-
-    // Download promo only appears in B2
-    #firefox-promo {
-        h3 {
-            float: none;
-            width: auto;
-            font-size: 28px;
-            margin: 0 auto auto 100px;
-            min-height: 60px;
-            white-space: normal;
-        }
-        .download-button {
-            width: auto;
-            float: none;
-            display: block;
-            margin: 15px 10px;
-
-            .download-link {
-                width: 100%;
-            }
-        }
-        #firefox-promo-link {
-            left: 0;
-            top: -15px;
-            width: 80px;
-            height: auto;
-        }
-        .features {
-            display: none;
-        }
-    }
-
-    /* iOS temporary styles until we have new 'unsupported' text */
-    .ios #firefox-promo {
-        min-height: 90px;
-        padding-top: 20px;
-        h3 {
-            margin: 0 auto auto 100px;
-        }
-        #firefox-promo-link {
-            left: @gridGutterWidth;
-        }
-    }
-
 
     .mission {
         width: 260px;
@@ -1007,13 +973,56 @@
     .contribute {
         width: auto;
         float: none;
-        margin: 0 auto @baseLine;
+        margin: 0 10px @baseLine;
     }
 
     .extra .newsletter-form {
         width: auto;
         float: none;
-        margin: 0 auto @baseLine;
+        margin: 0 10px @baseLine;
+    }
+
+    // Download promo only appears in B2
+    #firefox-promo {
+        h3 {
+            float: none;
+            width: auto;
+            font-size: 28px;
+            margin: 0 auto auto 100px;
+            min-height: 60px;
+            white-space: normal;
+        }
+        .download-button {
+            width: auto;
+            float: none;
+            display: block;
+            margin: 15px 10px;
+
+            .download-link {
+                width: 100%;
+            }
+        }
+        #firefox-promo-link {
+            left: 0;
+            top: -15px;
+            width: 80px;
+            height: auto;
+        }
+        .features {
+            display: none;
+        }
+    }
+
+    /* iOS temporary styles until we have new 'unsupported' text */
+    .ios #firefox-promo {
+        min-height: 90px;
+        padding-top: 20px;
+        h3 {
+            margin: 0 auto auto 100px;
+        }
+        #firefox-promo-link {
+            left: 20px;
+        }
     }
 
 }
@@ -1027,7 +1036,6 @@
     }
 
     .pillars {
-        width: @widthMobileLandscape - (@gridGutterWidth * 2);
         background-image: url(/media/img/home/box-shadow-440.png);
         padding-bottom: 18px;
     }
@@ -1039,6 +1047,10 @@
         .pillars {
             width: @widthMobileLandscape - (@gridGutterWidth * 2);
         }
+    }
+
+    .download .download-button {
+        margin-left: 60px;
     }
 
     #firefox-promo {
