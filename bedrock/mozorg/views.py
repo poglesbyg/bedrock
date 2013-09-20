@@ -16,7 +16,7 @@ import requests
 from lib import l10n_utils
 from commonware.decorators import xframe_allow
 from funfactory.urlresolvers import reverse
-from lib.l10n_utils.dotlang import _
+from lib.l10n_utils.dotlang import _, lang_file_is_active
 
 from bedrock.firefox import version_re
 from bedrock.firefox.utils import is_current_or_newer
@@ -230,6 +230,12 @@ class Robots(TemplateView):
 
 class HomeTestView(TemplateView):
     """Home page view that will use a different template for a QS."""
+
+    def get_context_data(self, **kwargs):
+        ctx = super(HomeTestView, self).get_context_data(**kwargs)
+        ctx['has_contribute'] = lang_file_is_active('mozorg/contribute',
+                                                    l10n_utils.get_locale(self.request))
+        return ctx
 
     def get_template_names(self):
         version = self.request.GET.get('v', 0)
