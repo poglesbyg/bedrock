@@ -22,8 +22,13 @@
             wideMode = false;
             $('body').removeClass('wide');
         }
+        // Reset all accordion panels
+        $('.panel').removeAttr('style');
+        // Reset the carousel to adjust heights
+        setupCarousel();
     }
-    $(doneResizing);  // Call once when done loading the page to initialize.
+    // Call once when done loading the page to initialize.
+    $(doneResizing);
 
     var accordion = {
         // Expand the accordion horizontally
@@ -59,35 +64,40 @@
         },
     };
 
-    if (wideMode) {
-        // Horizontal accordion for wide viewports
-        $('.panel').hover(
-            function() { accordion.expandHorz($(this)); },
-            function() { accordion.contractHorz(); }
-        );
+    // Expand onmouseover, contract onmouseout
+    $('.panel').hover(
+        function() {
+            if (wideMode) {
+                accordion.expandHorz($(this));
+            } else {
+                accordion.expandVert($(this));
+            }
+        },
+        function() {
+            if (wideMode) {
+                accordion.contractHorz();
+            } else {
+                accordion.contractVert();
+            }
+        }
+    );
 
-        $('.panel').on('focus', function(){
-            accordion.expandHorz($(this));
-        });
-
-        $('.panel-content > a').on('blur', function() {
-            accordion.contractHorz();
-        });
-    } else {
-        // Vertical accordion for narrow viewports
-        $('.panel').hover(
-            function() { accordion.expandVert($(this)); },
-            function() { accordion.contractVert(); }
-        );
-
-        $('.panel').on('click', function() {
+    // Expand on click, but not in wide mode
+    $('.panel').on('click', function() {
+        if (!wideMode) {
             accordion.expandVert($(this));
-        });
+        }
+    });
 
-        $('.panel-content > a').on('blur', function() {
+    // Contract when the inner link loses focus
+    $('.panel-content > a').on('blur', function() {
+        if (wideMode) {
+            accordion.contractHorz();
+        } else {
             accordion.contractVert();
-        });
-    }
+        }
+    });
+
 
 
 /*
@@ -126,16 +136,18 @@
 
     // News
     // Set up the carousel
-    $(".news > .hfeed").jcarousel({
-        auto: 6,
-        vertical: true,
-        scroll: 1,
-        visible: 1,
-        wrap: 'circular',
-        itemLastOutCallback: { onAfterAnimation: disableButtons },
-        itemLastInCallback: { onAfterAnimation: disableButtons },
-        initCallback: controlButtons
-    });
+    function setupCarousel() {
+        $('.news > .hfeed').jcarousel({
+            auto: 6,
+            vertical: true,
+            scroll: 1,
+            visible: 1,
+            wrap: 'circular',
+            itemLastOutCallback: { onAfterAnimation: disableButtons },
+            itemLastInCallback: { onAfterAnimation: disableButtons },
+            initCallback: controlButtons
+        });
+    }
 
     // Add the next and previous control buttons
     function controlButtons(carousel) {

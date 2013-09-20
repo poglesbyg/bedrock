@@ -4,6 +4,8 @@
 
 @import "../sandstone/lib.less";
 
+
+// Bounce Tabzilla's caret when the page loads
 #tabzilla:after {
     animation-name: bounce;
     animation-delay: 1s;
@@ -18,6 +20,7 @@
     100% { top: 11px; }
 }
 
+// Add a double-arrow after 'go' links
 .go:after {
     content: ' »';
     white-space: nowrap;
@@ -25,12 +28,14 @@
 
 
 
-/* @General page layout *********/
-
-/* Override sandstone base styles so we can have full-width containers */
-#home-b2 {
-    #wrapper {
+// Home page B, version 2
+// Override sandstone base layout so we can have full-width blocks.
+.home-b2 {
+    #wrapper,
+    #main-content,
+    .billboard {
         width: 100%;
+        padding: 0;
     }
 
     #masthead,
@@ -43,16 +48,14 @@
         padding: 0;
     }
 
-    #main-content {
-        padding: 0;
-    }
-
-    .newsletter-form {
-        padding: 0 10px;
+    #colophon {
+        margin-top: 0;
     }
 }
 
-/* Header, mission statement *********/
+
+
+// @Header, @mission statement
 .mission {
     .open-sans-light;
     line-height: 1.1;
@@ -91,7 +94,7 @@
 
 
 
-/* @Accordion *********/
+// @Accordion
 .pillars {
     background: url(/media/img/home/box-shadow-960.png) center bottom no-repeat;
     width: @widthDesktop - (@gridGutterWidth * 2) - 10;
@@ -203,7 +206,6 @@
     display: none;
     font-size: 20px;
     line-height: 1.3;
-    padding: 100px 40px 40px 300px;
     position: relative;
     text-shadow: 0 1px 0 rgba(0, 0, 0, .15);
 
@@ -235,7 +237,8 @@
     }
 
     // Expand the link to fill the panel.
-    // This presumes a single block link for the entire panel. Future updates may negate this.
+    // This presumes a single block link for the entire panel.
+    // Future updates may negate this.
     & > a {
         position: absolute;
         top: 0;
@@ -264,17 +267,20 @@
 }
 
 .wide .panel-content {
-    display: none;
+    display: none; // This is safe because JS sets the 'wide' class on body
     height: 240px;
     width: 280px;
+    padding: 100px 40px 40px 300px;
     position: absolute;
     top: 0;
     left: 0;
 }
 
-/* @Promo panels - specific styling for individual panels. *********/
 
-/* Mozilla Mission */
+
+// @Promo panels - specific styling for individual panels.
+
+// Mozilla Mission
 #panel-mission {
     background: #b30406 url(/media/img/home/panel/mission/bg-mission-mosaic.png) -50px -80px no-repeat;
     background: url(/media/img/home/panel/mission/bg-mission-mosaic.png) -50px -80px no-repeat,
@@ -284,34 +290,26 @@
          -o-transition: background-position .5s ease-in-out;
             transition: background-position .5s ease-in-out;
 
-    .panel-title {
-
-
-        i {
-            display: block;
-        }
+    .panel-title i {
+        display: block;
     }
 }
 
 .wide #panel-mission .panel-title {
-        background: #821117;
-        background: -webkit-linear-gradient(bottom, rgba(185, 24, 26, .8) 65%, rgba(185, 24, 26, 0) 100%);
-        background:    -moz-linear-gradient(bottom, rgba(185, 24, 26, .8) 65%, rgba(185, 24, 26, 0) 100%);
-        background:      -o-linear-gradient(bottom, rgba(185, 24, 26, .8) 65%, rgba(185, 24, 26, 0) 100%);
-        background:         linear-gradient(bottom, rgba(185, 24, 26, .8) 65%, rgba(185, 24, 26, 0) 100%);
+    background: #821117;
+    background: -webkit-linear-gradient(bottom, rgba(185, 24, 26, .8) 65%, rgba(185, 24, 26, 0) 100%);
+    background:    -moz-linear-gradient(bottom, rgba(185, 24, 26, .8) 65%, rgba(185, 24, 26, 0) 100%);
+    background:      -o-linear-gradient(bottom, rgba(185, 24, 26, .8) 65%, rgba(185, 24, 26, 0) 100%);
+    background:         linear-gradient(bottom, rgba(185, 24, 26, .8) 65%, rgba(185, 24, 26, 0) 100%);
 }
 
-/* Firefox OS */
+// Firefox OS
 #panel-fxos {
     background: #0095dd url(/media/img/home/panel/firefoxos/firefoxos-fox.png) -230px -190px no-repeat;
     -webkit-transition: background-position .5s ease-in-out;
        -moz-transition: background-position .5s ease-in-out;
          -o-transition: background-position .5s ease-in-out;
             transition: background-position .5s ease-in-out;
-
-    .panel-title {
-
-    }
 
     &.expanded {
         background-position: -180px -190px;
@@ -331,27 +329,23 @@
 }
 
 .wide #panel-fxos .panel-title {
-        background: #0095dd;
-        background: -webkit-linear-gradient(bottom, rgba(0, 84, 160, .8) 65%, rgba(0, 84, 160, 0) 100%);
-        background:    -moz-linear-gradient(bottom, rgba(0, 84, 160, .8) 65%, rgba(0, 84, 160, 0) 100%);
-        background:      -o-linear-gradient(bottom, rgba(0, 84, 160, .8) 65%, rgba(0, 84, 160, 0) 100%);
-        background:         linear-gradient(bottom, rgba(0, 84, 160, .8) 65%, rgba(0, 84, 160, 0) 100%);
+    background: #0095dd;
+    background: -webkit-linear-gradient(bottom, rgba(0, 84, 160, .8) 65%, rgba(0, 84, 160, 0) 100%);
+    background:    -moz-linear-gradient(bottom, rgba(0, 84, 160, .8) 65%, rgba(0, 84, 160, 0) 100%);
+    background:      -o-linear-gradient(bottom, rgba(0, 84, 160, .8) 65%, rgba(0, 84, 160, 0) 100%);
+    background:         linear-gradient(bottom, rgba(0, 84, 160, .8) 65%, rgba(0, 84, 160, 0) 100%);
 }
 
-
-/* MDN */
+// MDN
 #panel-mdn {
     background: #1c1c1c url(/media/img/home/panel/mdn/bg-logo-mdn.png) -80px 10px no-repeat;
     background: url(/media/img/home/panel/mdn/bg-logo-mdn.png) -80px 10px no-repeat,
                 #1c1c1c url(/media/img/home/panel/mdn/bg-grid.png);
     transition: background-position .5s ease-in-out;
 
-    .panel-title {
-
-        i {
-            display: block;
-            color: #ff3c3e;
-        }
+    .panel-title i {
+        display: block;
+        color: #ff3c3e;
     }
 
     .panel-content {
@@ -380,14 +374,14 @@
 }
 
 .wide #panel-mdn .panel-title {
-        background: #000;
-        background: -webkit-linear-gradient(bottom, rgba(0, 0, 0, .8) 65%, rgba(0, 0, 0, 0) 100%);
-        background:    -moz-linear-gradient(bottom, rgba(0, 0, 0, .8) 65%, rgba(0, 0, 0, 0) 100%);
-        background:      -o-linear-gradient(bottom, rgba(0, 0, 0, .8) 65%, rgba(0, 0, 0, 0) 100%);
-        background:         linear-gradient(bottom, rgba(0, 0, 0, .8) 65%, rgba(0, 0, 0, 0) 100%);
+    background: #000;
+    background: -webkit-linear-gradient(bottom, rgba(0, 0, 0, .8) 65%, rgba(0, 0, 0, 0) 100%);
+    background:    -moz-linear-gradient(bottom, rgba(0, 0, 0, .8) 65%, rgba(0, 0, 0, 0) 100%);
+    background:      -o-linear-gradient(bottom, rgba(0, 0, 0, .8) 65%, rgba(0, 0, 0, 0) 100%);
+    background:         linear-gradient(bottom, rgba(0, 0, 0, .8) 65%, rgba(0, 0, 0, 0) 100%);
 }
 
-/* Mozilla Festival */
+// Mozilla Festival
 #panel-mozfest {
     background: #04364b url(/media/img/home/panel/mozfest/bg-mosaic.jpg);
     background: url(/media/img/home/panel/mozfest/logo-mozfest-big.png) -110px -15px no-repeat,
@@ -395,6 +389,7 @@
     transition: background-position .5s ease-in-out;
 
     .panel-title {
+        color: #04364b;
         text-shadow: 0 1px 0 #fff;
 
         i {
@@ -428,14 +423,15 @@
 }
 
 .wide #panel-mozfest .panel-title {
-        color: #04364b;
-        background: -webkit-linear-gradient(bottom, rgba(182, 186, 186, .95) 50%, rgba(182, 186, 186, .85) 65%, rgba(182, 186, 186, 0) 100%);
-        background:    -moz-linear-gradient(bottom, rgba(182, 186, 186, .95) 50%, rgba(182, 186, 186, .85) 65%, rgba(182, 186, 186, 0) 100%);
-        background:      -o-linear-gradient(bottom, rgba(182, 186, 186, .95) 50%, rgba(182, 186, 186, .85) 65%, rgba(182, 186, 186, 0) 100%);
-        background:         linear-gradient(bottom, rgba(182, 186, 186, .95) 50%, rgba(182, 186, 186, .85) 65%, rgba(182, 186, 186, 0) 100%);
+    background: -webkit-linear-gradient(bottom, rgba(182, 186, 186, .95) 50%, rgba(182, 186, 186, .85) 65%, rgba(182, 186, 186, 0) 100%);
+    background:    -moz-linear-gradient(bottom, rgba(182, 186, 186, .95) 50%, rgba(182, 186, 186, .85) 65%, rgba(182, 186, 186, 0) 100%);
+    background:      -o-linear-gradient(bottom, rgba(182, 186, 186, .95) 50%, rgba(182, 186, 186, .85) 65%, rgba(182, 186, 186, 0) 100%);
+    background:         linear-gradient(bottom, rgba(182, 186, 186, .95) 50%, rgba(182, 186, 186, .85) 65%, rgba(182, 186, 186, 0) 100%);
 }
 
-/* @Extra content - The lower section of the page, featuring news and a Firefox download button. */
+
+
+// @Extra content - The lower section of the page
 .extra {
     margin-bottom: @baseLine * 2;
 
@@ -445,9 +441,11 @@
     }
 }
 
-#home-b2 .extra {
+// Alternative styling for version B2
+.home-b2 .extra {
     background: #c1423d;
     padding: 40px 0;
+    margin-bottom: 0;
     color: #fff;
     text-shadow: 0 1px 0 rgba(0, 0, 0, .1);
 
@@ -457,6 +455,155 @@
     }
 }
 
+
+
+// @Download Firefox - in right-side block for version B1
+.download {
+    .span(4);
+    .offset(1);
+    float: right;
+}
+
+
+
+// @Newsletter form
+// Appears in the extra section in version B2
+.extra {
+    .newsletter-form {
+        .span(4);
+        .offset(1);
+        float: right;
+        background: transparent;
+        padding: 0;
+        border: 0;
+        box-shadow: none;
+    }
+
+    #footer-email-form {
+        h3 {
+            font-size: 34px;
+            margin: 0 0 .75em;
+            color: #fff;
+            text-shadow: 0 1px 0 rgba(0, 0, 0, .1);
+        }
+
+        .form-contents,
+        .form-submit {
+            width: auto;
+            float: none;
+            margin: 0 0 @baseLine;
+        }
+
+        .field-email input {
+            width: 80%;
+            padding: 10px 5%;
+            border-radius: .5em;
+        }
+
+        select {
+            padding: 5px;
+        }
+
+        a:link,
+        a:visited {
+            color: #fff;
+        }
+
+        .button {
+            width: 90%;
+            padding: 10px 5%;
+        }
+    }
+}
+
+// Newsletter form has the standard layout in B1
+// but with reduced padding
+.home-b1 .newsletter-form {
+    padding-top: @baseLine;
+    padding-bottom: @baseLine;
+}
+
+
+// @Download Firefox - promo bar appears in version B2
+#firefox-promo {
+    padding-top: @baseLine;
+    padding-bottom: 0;
+    margin: 0;
+    position: relative;
+
+    h3 {
+        .span(3);
+        position: relative;
+        margin-top: 10px;
+        margin-bottom: 0;
+        padding-bottom: .2em;
+        letter-spacing: -1px;
+        white-space: nowrap;
+    }
+
+    #firefox-promo-link {
+        position: absolute;
+        top: -30px;
+        left: 280px;
+    }
+
+    .features {
+        .span(4);
+        width: 280px;
+        margin: 10px 0 0 160px;
+
+        li {
+            float: left;
+            list-style-type: none;
+            margin: 0;
+            width: 93px;
+            padding: 0;
+            text-align: center;
+
+            small {
+                display: block;
+                padding: 0 6px;
+                border-left: 1px dotted @borderColor;
+            }
+
+            &:first-child small {
+                border: 0;
+            }
+        }
+    }
+
+    .download-button {
+        .span(4);
+        width: auto;
+        float: right;
+        margin-top: -6px;
+        margin-left: (@gridGutterWidth / 2);
+        padding-bottom: 6px;
+    }
+}
+
+// iOS temporary styles until we have new unsupported text
+.ios {
+    #firefox-promo {
+        min-height: 62px;
+
+        h3 {
+            margin: 0 0 0 170px;
+        }
+
+        #firefox-promo-link {
+            left: 445px;
+        }
+    }
+
+    .download-button .unsupported-download {
+        display: none;
+    }
+}
+
+
+
+// @News
 .news {
     .span(7);
     float: right;
@@ -478,12 +625,6 @@
         margin: 0 0 .5em;
     }
 
-}
-
-#home-b2 .news a:link,
-#home-b2 .news a:visited {
-    color: #fff;
-    text-shadow: 0 1px 0 rgba(0, 0, 0, .1);
 }
 
 .news-buttons {
@@ -520,15 +661,17 @@
     }
 }
 
-.download {
-    .span(4);
-    .offset(1);
-    float: right;
-}
+// Light colors for B2
+.home-b2 {
+    .news a:link,
+    .news a:visited {
+        color: #fff;
+        text-shadow: 0 1px 0 rgba(0, 0, 0, .1);
+    }
 
-.newsletter-form {
-    padding-top: @baseLine;
-    padding-bottom: @baseLine;
+    .news-buttons button {
+        background-image: url(/media/img/home/control-arrows-lt.png);
+    }
 }
 
 
@@ -536,11 +679,14 @@
 /* Tablet Layout: 760px */
 @media only screen and (min-width: @breakTablet) and (max-width: @breakDesktop) {
 
-    // #masthead,
-    // .container,
-    // .newsletter-form {
-    //     width: @widthTablet - (@gridGutterWidth * 2);
-    // }
+    // Adjust layout for B2
+    .home-b2 {
+        #masthead,
+        .container,
+        .newsletter-form {
+            width: @widthTablet - (@gridGutterWidth * 2);
+        }
+    }
 
     .mission p {
         font-size: 42px;
@@ -571,8 +717,14 @@
         .go {
             font-size: 16px;
         }
+
+        & > a {
+            padding: 80px 20px 20px 200px;
+        }
+
     }
 
+    // Adjust panel backgrounds
     #panel-mission {
         background-position: -80px -50px;
         background-position: -80px -50px, 0 0;
@@ -608,6 +760,7 @@
         background-position: 140px 0;
     }
 
+    // Adjust columns
     .news {
         .span_narrow(7);
         float: right;
@@ -627,17 +780,136 @@
         }
     }
 
+    .extra .newsletter-form {
+        .span_narrow(5);
+        float: right;
+    }
+
+    // Download promo only appears in B2
+    #firefox-promo {
+        padding-bottom: 12px;
+
+        h3 {
+            .span_narrow(7);
+            white-space: normal;
+        }
+
+        .features {
+            .span_narrow(7);
+            margin-bottom: 10px;
+            li {
+                float: none;
+                width: auto;
+                margin: auto auto auto @baseLine;
+                list-style-type: disc;
+                small {
+                    text-align: left;
+                    border: 0;
+                    padding: 0;
+                    br { display: none; }
+                }
+            }
+        }
+
+        .download-button {
+            margin-top: -30px;
+        }
+    }
+
+    /* iOS temporary styles until we have new unsupported text */
+    .ios #firefox-promo {
+
+        h3 {
+            margin: 0 0 0 30px;
+        }
+
+        #firefox-promo-link {
+            left: 305px;
+        }
+
+        .features {
+            .span(4);
+            margin: 0;
+            width: auto;
+
+            li {
+                float: left;
+                list-style-type: none;
+                margin: 0;
+                width: 86px;
+                padding: 0;
+                text-align: center;
+
+                small {
+                    display: block;
+                    padding: 0 6px;
+                    border-left: 1px dotted @borderColor;
+                }
+
+                &:first-child small {
+                    border: 0;
+                }
+            }
+        }
+    }
+
 }
 
 /* Mobile layout: 320px */
 @media only screen and (max-width: @breakTablet) {
 
-    #masthead,
-    .container,
-    .newsletter-form,
-    .pillars {
-        width: @widthMobile - (@gridGutterWidth * 2);
+    .home-b2 {
+        #masthead,
+        .container,
+        .newsletter-form,
+        .pillars {
+            width: @widthMobile - (@gridGutterWidth * 2);
+        }
     }
+
+    // Download promo only appears in B2
+    #firefox-promo {
+        h3 {
+            float: none;
+            width: auto;
+            font-size: 28px;
+            margin: 0 auto auto 100px;
+            min-height: 60px;
+            white-space: normal;
+        }
+        .download-button {
+            width: auto;
+            float: none;
+            display: block;
+            margin: 15px 10px;
+
+            .download-link {
+                width: 100%;
+            }
+        }
+        #firefox-promo-link {
+            left: 0;
+            top: -15px;
+            width: 80px;
+            height: auto;
+        }
+        .features {
+            display: none;
+        }
+    }
+
+    /* iOS temporary styles until we have new 'unsupported' text */
+    .ios #firefox-promo {
+        min-height: 90px;
+        padding-top: 20px;
+        h3 {
+            margin: 0 auto auto 100px;
+        }
+        #firefox-promo-link {
+            left: @gridGutterWidth;
+        }
+    }
+
 
     .mission {
         width: 260px;
@@ -670,6 +942,7 @@
         margin: 0 0 0 -1px;
     }
 
+    // Vertical accordion for narrow viewports
     .panel {
         float: none;
         width: 100%;
@@ -712,8 +985,15 @@
         }
     }
 
+    // Full width columns for narrow viewports
     .news,
     .download {
+        width: auto;
+        float: none;
+        margin: 0 auto @baseLine;
+    }
+
+    .extra .newsletter-form {
         width: auto;
         float: none;
         margin: 0 auto @baseLine;
@@ -723,12 +1003,6 @@
 
 /* Wide mobile layout: 480px; */
 @media only screen and (min-width: @breakMobileLandscape) and (max-width: @breakTablet) {
-
-    #masthead,
-    .container,
-    .newsletter-form {
-        width: @widthMobileLandscape - (@gridGutterWidth * 2);
-    }
 
     .mission {
         width: 260px;
@@ -741,7 +1015,30 @@
         padding-bottom: 18px;
     }
 
+    // Version B2
+    .home-b2 {
+        #masthead,
+        .container,
+        .pillars {
+            width: @widthMobileLandscape - (@gridGutterWidth * 2);
+        }
+    }
+
+    #firefox-promo {
+        padding-top: 5px;
+
+        h3 {
+            margin-top: 25px;
+            min-height: 55px;
+        }
+
+        #firefox-promo-link {
+            top: -20px;
+        }
+
+        .download-button {
+            margin: 15px 30px 5px;
+        }
+    }
 
 }
-
-
