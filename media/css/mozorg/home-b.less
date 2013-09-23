@@ -386,7 +386,7 @@
 
 // Mozilla Festival
 #panel-mozfest {
-    background: #04364b url(/media/img/home/panel/mozfest/bg-mosaic.jpg);
+    background: #04364b url(/media/img/home/panel/mozfest/logo-mozfest-big.png) -110px -15px no-repeat;
     background: url(/media/img/home/panel/mozfest/logo-mozfest-big.png) -110px -15px no-repeat,
                 #04364b url(/media/img/home/panel/mozfest/bg-mosaic.jpg);
     transition: background-position .5s ease-in-out;
@@ -415,21 +415,23 @@
     }
 
     &.expanded {
+        background-position: -80px -15px;
         background-position: -80px -15px, 0 0;
         transition: background-position .5s ease-in-out;
     }
 
     &.compressed {
+        background-position: -170px -15px;
         background-position: -170px -15px, 0 0;
         transition: background-position .5s ease-in-out;
     }
 }
 
 .wide #panel-mozfest .panel-title {
-    background: -webkit-linear-gradient(bottom, rgba(182, 186, 186, .95) 50%, rgba(182, 186, 186, .85) 65%, rgba(182, 186, 186, 0) 100%);
-    background:    -moz-linear-gradient(bottom, rgba(182, 186, 186, .95) 50%, rgba(182, 186, 186, .85) 65%, rgba(182, 186, 186, 0) 100%);
-    background:      -o-linear-gradient(bottom, rgba(182, 186, 186, .95) 50%, rgba(182, 186, 186, .85) 65%, rgba(182, 186, 186, 0) 100%);
-    background:         linear-gradient(bottom, rgba(182, 186, 186, .95) 50%, rgba(182, 186, 186, .85) 65%, rgba(182, 186, 186, 0) 100%);
+    background: -webkit-linear-gradient(bottom, rgba(206, 211, 211, .95) 50%, rgba(206, 211, 211, .85) 65%, rgba(206, 211, 211, 0) 100%);
+    background:    -moz-linear-gradient(bottom, rgba(206, 211, 211, .95) 50%, rgba(206, 211, 211, .85) 65%, rgba(206, 211, 211, 0) 100%);
+    background:      -o-linear-gradient(bottom, rgba(206, 211, 211, .95) 50%, rgba(206, 211, 211, .85) 65%, rgba(206, 211, 211, 0) 100%);
+    background:         linear-gradient(bottom, rgba(206, 211, 211, .95) 50%, rgba(206, 211, 211, .85) 65%, rgba(206, 211, 211, 0) 100%);
 }
 
 
@@ -761,11 +763,12 @@
     }
 
     #panel-fxos {
-        background-position: -260px -220px;
+        background-image: url(/media/img/home/panel/firefoxos/firefoxos-fox-md.png);
+        background-position: -185px -100px;
 
         &.expanded,
         &.compressed {
-            background-position: -280px -220px;
+            background-position: -166px -100px;
         }
     }
 
@@ -880,8 +883,8 @@
 }
 
 
-
-/* Mobile layout: 320px */
+/****************************************************************************/
+// @Mobile layout: 320px
 @media only screen and (max-width: @breakTablet) {
 
     .home-b2 {
@@ -889,7 +892,7 @@
         .container,
         .newsletter-form,
         .pillars {
-            width: @widthMobile - (@gridGutterWidth * 2);
+            width: @widthMobile - @gridGutterWidth;
         }
     }
 
@@ -932,7 +935,7 @@
         margin: 0;
         overflow: hidden;
         position: relative;
-        box-shadow: inset 0 3px 10px -4px rgba(0, 0, 0, .5);
+        box-shadow: inset 0 4px 10px -5px rgba(0, 0, 0, .75);
 
         &:first-child {
             box-shadow: none;
@@ -947,7 +950,7 @@
         position: static;
         width: auto;
         height: auto;
-        padding: .75em 20px .75em 45%;
+        padding: .75em 20px .75em 40%;
         min-height: 3em;
         text-align: left;
         font-size: 16px;
@@ -959,11 +962,92 @@
 
     .panel-content {
         font-size: 16px;
-        width: auto;
-        height: auto;
-        padding: 20px 20px 20px 45%;
+        line-height: 1.2;
+        width: 100%;
+        height: 100%;
+
+        & > a {
+            padding: 20px 20px 20px 40%;
+        }
+
         .panel-logo {
             position: static;
+            display: block;
+            margin-bottom: 10px;
+        }
+    }
+
+    // Adjustments for specific panels.
+    // Mozilla Mission
+    #panel-mission {
+        background-image: url(/media/img/home/panel/mission/bg-mission-mosaic-sm.png);
+        background-image: url(/media/img/home/panel/mission/bg-mission-mosaic-sm.png),
+                          url(/media/img/home/panel/mission/bg-mission-cubes.png);
+        background-position: -122px -45px;
+        background-position: -122px -45px, 0 0;
+
+        &.expanded {
+            background-position: -122px -20px;
+            background-position: -122px -20px, 0 0;
+        }
+    }
+
+    // Firefox OS
+    #panel-fxos {
+        background-image: url(/media/img/home/panel/firefoxos/firefoxos-fox-sm.png);
+        background-position: -110px -95px;
+
+        &.expanded {
+            background-position: -110px -30px;
+        }
+
+        &.compressed {
+            background-position: -110px -110px;
+        }
+    }
+
+    // MDN
+    #panel-mdn {
+        background-image: url(/media/img/home/panel/mdn/bg-logo-mdn-sm.png);
+        background-position: -25px -10px;
+
+        &.expanded {
+            background-position: -25px 25px;
+        }
+
+        &.compressed {
+            background-position: -25px -15px;
+        }
+
+        .panel-title i {
+            color: inherit;
+        }
+    }
+
+    // Mozilla Festival
+    #panel-mozfest {
+        background-image: url(/media/img/home/panel/mozfest/logo-mozfest-sm.png);
+        background-image: url(/media/img/home/panel/mozfest/logo-mozfest-sm.png),
+                          url(/media/img/home/panel/mozfest/bg-mosaic.jpg);
+        background-position: -60px -35px;
+        background-position: -60px -35px, 0 0;
+
+        .panel-content {
+            background-position: 70px 0;
+        }
+
+        .panel-title i {
+            color: inherit;
+        }
+
+        &.expanded {
+            background-position: -60px 20px;
+            background-position: -60px 20px, 0 0;
+        }
+
+        &.compressed {
+            background-position: -60px -40px;
+            background-position: -60px -40px, 0 0;
         }
     }
 
@@ -1027,7 +1111,10 @@
 
 }
 
-/* Wide mobile layout: 480px; */
+
+
+/****************************************************************************/
+// @Wide @mobile layout: 480px
 @media only screen and (min-width: @breakMobileLandscape) and (max-width: @breakTablet) {
 
     .mission {
@@ -1045,7 +1132,71 @@
         #masthead,
         .container,
         .pillars {
-            width: @widthMobileLandscape - (@gridGutterWidth * 2);
+            width: @widthMobileLandscape - @gridGutterWidth;
+        }
+    }
+
+    // Mozilla Mission
+    #panel-mission {
+        background-position: -80px -45px;
+        background-position: -80px -45px, 0 0;
+
+        &.expanded {
+            background-position: -80px -20px;
+            background-position: -80px -20px, 0 0;
+        }
+    }
+
+    // Firefox OS
+    #panel-fxos {
+        background-position: -70px -95px;
+
+        &.expanded {
+            background-position: -70px -30px;
+        }
+
+        &.compressed {
+            background-position: -70px -110px;
+        }
+    }
+
+    //MDN
+    #panel-mdn {
+        background-position: 10px -20px;
+        background-position: 10px -20px, 0 0;
+
+        &.expanded {
+            background-position: 10px 25px;
+            background-position: 10px 25px, 0 0;
+        }
+
+        &.compressed {
+            background-position: 10px -25px;
+            background-position: 10px -25px, 0 0;
+        }
+    }
+
+    // Mozilla Festival
+    #panel-mozfest {
+        background-position: -15px -35px;
+        background-position: -15px -35px, 0 0;
+
+        .panel-content {
+            background-position: 110px 0;
+        }
+
+        .panel-title i {
+            color: inherit;
+        }
+
+        &.expanded {
+            background-position: -15px 20px;
+            background-position: -15px 20px, 0 0;
+        }
+
+        &.compressed {
+            background-position: -15px -40px;
+            background-position: -15px -40px, 0 0;
         }
     }
 

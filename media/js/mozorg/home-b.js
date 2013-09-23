@@ -1,3 +1,7 @@
+/* This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at http://mozilla.org/MPL/2.0/. */
+
 (function() {
     'use strict';
 
@@ -50,7 +54,7 @@
         // Expand the accordion vertically
         expandVert: function(elem) {
             $('.panel-title').fadeOut(200);
-            elem.stop().removeClass('compressed').addClass('expanded').animate({'height':'300px'},500);
+            elem.stop().removeClass('compressed').addClass('expanded').animate({'height':'26em'},500);
             elem.siblings().stop().removeClass('expanded').addClass('compressed').animate({'height':'3em'},500);
             $('.panel-content', elem).stop(true,true).delay(200).fadeIn();
         },
