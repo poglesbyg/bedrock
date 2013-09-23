@@ -1,4 +1,9 @@
+/* This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at http://mozilla.org/MPL/2.0/. */
+
 $(document).ready(function() {
+    'use strict';
 
     // {{{ showLink()
 
@@ -632,5 +637,27 @@ $(document).ready(function() {
     // configured before the SWF will work.
     var base = location.protocol + '//' + location.host;
     vjs.options.flash.swf = base + '/media/js/libs/video-js/video-js.swf';
+
+
+    // Track newsletter signups
+    $('#footer-email-form').on('submit', function() {
+        if (window._gaq) {
+            window._gaq.push(['_trackEvent', 'Newsletter Registration','submit', 'Registered for Mozilla Updates']);
+        }
+    });
+
+    // Track Firefox downloads
+    $('.download-link').on('click', function() {
+        var platform;
+        if ($(this).parents('li.os_android')) {
+            platform = 'Firefox for Android';
+        } else {
+            platform = 'Firefox Desktop';
+        }
+        if (window._gaq) {
+            window._gaq.push(['_trackEvent', 'Firefox Downloads', 'download click', platform]);
+        }
+    });
+
 
 });

@@ -2,7 +2,7 @@
  * License, v. 2.0. If a copy of the MPL was not distributed with this
  * file, You can obtain one at http://mozilla.org/MPL/2.0/. */
 
-(function() {
+;(function($) {
     'use strict';
 
     var $window = $(window);
@@ -36,11 +36,12 @@
 
     var accordion = {
         // Expand the accordion horizontally
-        expandHorz: function(elem) {
+        expandHorz: function(action, elem) {
             $('.panel-title').fadeOut(200);
             elem.stop().removeClass('compressed').addClass('expanded').animate({'width':'64%'},500);
             elem.siblings().stop().removeClass('expanded').addClass('compressed').animate({'width':'12%'},500);
             $('.panel-content', elem).stop(true,true).delay(200).fadeIn();
+            track_accordion(action, ($('.panel').index(elem) + 1), elem.attr('id'));
         },
 
         // Contract the accordion horizontally
@@ -52,11 +53,12 @@
         },
 
         // Expand the accordion vertically
-        expandVert: function(elem) {
+        expandVert: function(action, elem) {
             $('.panel-title').fadeOut(200);
             elem.stop().removeClass('compressed').addClass('expanded').animate({'height':'26em'},500);
             elem.siblings().stop().removeClass('expanded').addClass('compressed').animate({'height':'3em'},500);
             $('.panel-content', elem).stop(true,true).delay(200).fadeIn();
+            track_accordion(action, ($('.panel').index(elem) + 1), elem.attr('id'));
         },
 
         // Contract the accordion vertically
@@ -68,13 +70,14 @@
         },
     };
 
+
     // Expand onmouseover, contract onmouseout
     $('.panel').hover(
         function() {
             if (wideMode) {
-                accordion.expandHorz($(this));
+                accordion.expandHorz('hover', $(this));
             } else {
-                accordion.expandVert($(this));
+                accordion.expandVert('hover', $(this));
             }
         },
         function() {
@@ -86,10 +89,10 @@
         }
     );
 
-    // Expand on click, but not in wide mode
+    // Expand on click, but only in small viewports
     $('.panel').on('click', function() {
         if (!wideMode) {
-            accordion.expandVert($(this));
+            accordion.expandVert('click', $(this));
         }
     });
 
@@ -101,42 +104,6 @@
             accordion.contractVert();
         }
     });
-
-
-
-/*
-    // Animate the accordion
-    $('.accordion > li').hover(
-        function() {
-            var $this = $(this);
-            if (wideMode) {
-                $('.panel-title').fadeOut(400);
-                $this.stop().addClass('expanded').animate({'width':'64%'},500);
-                $this.siblings().stop().addClass('compressed').animate({'width':'12%'},500);
-                $('.panel-content',$this).stop(true,true).delay(200).fadeIn();
-            } else {
-                $('.panel-title').fadeOut(400);
-                $this.stop().addClass('expanded').animate({'height':'300px'},500);
-                $this.siblings().stop().addClass('compressed').animate({'height':'3em'},500);
-                $('.panel-content',$this).stop(true,true).delay(200).fadeIn();
-            }
-        },
-        function() {
-            var $this = $(this);
-            if (wideMode) {
-                $('.accordion > li').stop().animate({'width':'25%'},700, function(){
-                    $('.panel-title').fadeIn(250);
-                }).removeClass('expanded compressed');
-                $('.panel-content',$this).stop(true,true).fadeOut(500);
-            } else {
-                $('.accordion > li').stop().animate({'height':'4em'},700, function(){
-                    $('.panel-title').fadeIn(250);
-                }).removeClass('expanded compressed');
-                $('.panel-content',$this).stop(true,true).fadeOut(500);
-            }
-        }
-    );
-*/
 
     // News
     // Set up the carousel
@@ -155,8 +122,8 @@
 
     // Add the next and previous control buttons
     function controlButtons(carousel) {
-        var $buttonNext = $('<button class="btn-next">' + window.trans('news-next') + '</button>');
-        var $buttonPrev = $('<button class="btn-prev">' + window.trans('news-prev') + '</button>');
+        var $buttonNext = $('<button type="button" class="btn-next">' + window.trans('news-next') + '</button>');
+        var $buttonPrev = $('<button type="button" class="btn-prev">' + window.trans('news-prev') + '</button>');
         var $buttons = $('<span class="news-buttons"></span>');
 
         $buttonNext.prependTo($buttons);
@@ -165,9 +132,15 @@
 
         $('.btn-next').bind('click', function() {
             carousel.next();
+            if (window._gaq) {
+                window._gaq.push(['_trackEvent', 'Mozilla in the News Interactions', 'Next', 'News Navigation Arrows']);
+            }
         });
         $('.btn-prev').bind('click', function() {
             carousel.prev();
+            if (window._gaq) {
+                window._gaq.push(['_trackEvent', 'Mozilla in the News Interactions', 'Previous', 'News Navigation Arrows']);
+            }
         });
     }
 
@@ -185,4 +158,46 @@
         }
     }
 
-})(jQuery);
+
+    // Track which accordion panels are opened
+    var track_accordion = function(action, position, id) {
+        if (window._gaq) {
+            window._gaq.push(['_trackEvent','Homepage Interactions', action, position, id]);
+        }
+    };
+
+    // Track newsletter signups
+    $('#footer-email-form').on('submit', function() {
+        if (window._gaq) {
+            window._gaq.push(['_trackEvent', 'Newsletter Registration','submit', 'Registered for Mozilla Updates']);
+        }
+    });
+
+    // Track Firefox downloads
+    $('.download-link').on('click', function() {
+        var platform;
+        if ($(this).parents('li.os_android')) {
+            platform = 'Firefox for Android';
+        } else {
+            platform = 'Firefox Desktop';
+        }
+        if (window._gaq) {
+            window._gaq.push(['_trackEvent', 'Firefox Downloads', 'download click', platform]);
+        }
+    });
+
+    // Track news clicks
+    $('.news a').on('click', function() {
+        if (window._gaq) {
+            window._gaq.push(['_trackEvent', 'Mozilla in the News Interactions','click', this.href]);
+        }
+    });
+
+    // Track contribute clicks
+    $('.contribute a').on('click', function() {
+        if (window._gaq) {
+            window._gaq.push(['_trackEvent', 'Get Involved Interactions','clicks', 'Get Involved Button']);
+        }
+    });
+
+})(window.jQuery);
