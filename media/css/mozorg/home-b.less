@@ -115,7 +115,7 @@
     position: absolute;
     left: 2px;
     top: 0;
-    width: 100%;
+    width: 102%;
     overflow: hidden;
 }
 
@@ -157,7 +157,7 @@
     text-align: center;
     text-transform: uppercase;
     text-shadow: 0 1px 0 rgba(0, 0, 0, .15);
-    width: 210px;
+    width: 215px;
     height: 80px;
     -webkit-transition: bottom .5s ease-out;
        -moz-transition: bottom .5s ease-out;
@@ -538,6 +538,7 @@
 
     h3 {
         .span(3);
+        .offset(1);
         position: relative;
         margin-top: 10px;
         margin-bottom: 0;
@@ -549,7 +550,7 @@
     #firefox-promo-link {
         position: absolute;
         top: -30px;
-        left: 280px;
+        left: 380px;
     }
 
     .features {
@@ -579,10 +580,9 @@
 
     .download-button {
         .span(4);
+        .offset(3);
         width: auto;
-        float: right;
         margin-top: -6px;
-        margin-left: (@gridGutterWidth / 2);
         padding-bottom: 6px;
     }
 }
@@ -726,7 +726,7 @@
 
     .panel-title {
         font-size: 16px;
-        width: 148px;
+        width: 152px;
     }
 
     .wide .panel-content {
@@ -751,6 +751,7 @@
     }
 
     // Adjust panel backgrounds
+    // Mozilla Mission
     #panel-mission {
         background-position: -80px -50px;
         background-position: -80px -50px, 0 0;
@@ -762,6 +763,7 @@
         }
     }
 
+    // Firefox OS
     #panel-fxos {
         background-image: url(/media/img/home/panel/firefoxos/firefoxos-fox-md.png);
         background-position: -185px -100px;
@@ -772,6 +774,7 @@
         }
     }
 
+    // MDN
     #panel-mdn {
         background-position: -100px -5px;
         background-position: -100px -5px, 0 0;
@@ -783,12 +786,13 @@
         }
     }
 
+    // Mozilla Festival
     #panel-mozfest .panel-content {
         background-position: 140px 0;
     }
 
     // Adjust columns
-    .news
+    .news,
     .contribute {
         .span_narrow(7);
 
@@ -814,16 +818,22 @@
 
     // Download promo only appears in B2
     #firefox-promo {
-        padding-bottom: 12px;
 
         h3 {
-            .span_narrow(7);
+            .span_narrow(4);
+            margin-top: 10px;
+            margin-bottom: 0;
             white-space: normal;
+        }
+
+        #firefox-promo-link {
+            left: 280px;
         }
 
         .features {
             .span_narrow(7);
             margin-bottom: 10px;
+
             li {
                 float: none;
                 width: auto;
@@ -839,7 +849,8 @@
         }
 
         .download-button {
-            margin-top: -30px;
+            float: right;
+            margin-top: -50px;
         }
     }
 
@@ -956,7 +967,11 @@
         font-size: 16px;
 
         &:after {
-            content: '';
+            content: '\25be';
+            font-size: 1.6em;
+            position: absolute;
+            right: 20px;
+            top: 25%;
         }
     }
 
